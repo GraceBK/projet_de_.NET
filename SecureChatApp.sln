@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureChatApp", "SecureChatApp\SecureChatApp.csproj", "{B47690D8-5758-4B78-A8EA-AA9A530CFDFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B47690D8-5758-4B78-A8EA-AA9A530CFDFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B47690D8-5758-4B78-A8EA-AA9A530CFDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B47690D8-5758-4B78-A8EA-AA9A530CFDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B47690D8-5758-4B78-A8EA-AA9A530CFDFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FAC8EF0-37C8-4CEC-B7BB-D140C0F3BAB4}
+	EndGlobalSection
+EndGlobal
