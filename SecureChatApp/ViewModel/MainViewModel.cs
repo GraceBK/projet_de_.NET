@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SecureChatApp.ViewModel
@@ -17,6 +18,8 @@ namespace SecureChatApp.ViewModel
     {
         private string dbPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "database\\grace.db3");// "db/grace.db3";
         SQLiteConnection db;
+
+        private static PersonneClass GRACE;
 
         private ObservableCollection<PersonneClass> collectionPersonnes;
         private PersonneClass selectedPersonne;
@@ -31,7 +34,7 @@ namespace SecureChatApp.ViewModel
                 if (selectedPersonne != value)
                 {
                     selectedPersonne = value;
-                   // this.NotifyPropertyChanged("SelectPersonne");
+                    this.NotifyPropertyChanged("SelectPersonne");
                     this.NotifyPropertyChanged("CollectionMsgByPersonne");
                 }
             }
@@ -46,6 +49,7 @@ namespace SecureChatApp.ViewModel
                 if (collectionPersonnes != value)
                 {
                     collectionPersonnes = value;
+                    this.NotifyPropertyChanged("CollectionPers");
                 }
             }
         }
@@ -82,7 +86,7 @@ namespace SecureChatApp.ViewModel
             {
                 if (selectedPersonne != null)
                 {
-                    return new PersonneClass("Grace 1").MessagesByUser(selectedPersonne);
+                    return GRACE.MessagesByUser(selectedPersonne);
                 }
                 return null;
             }
@@ -97,24 +101,43 @@ namespace SecureChatApp.ViewModel
             db = new SQLiteConnection(dbPath);
             #endregion
             db.CreateTable<PersonneClass>();
+            //db.CreateTable<MessageClass>();
+
+
+
             PersonneClass p = new PersonneClass("Test moi");
-            db.Insert(p);
+            GRACE = p;
+
+            try
+            {
+                db.Insert(p);
+            } catch (SQLite.SQLiteException e)
+            {
+                Console.WriteLine("EXIT");
+            }
+            
             
 
             collectionPersonnes = new ObservableCollection<PersonneClass>();
 
             PersonneClass pers1 = new PersonneClass("Grace 1");
             PersonneClass pers2 = new PersonneClass("Grace 2");
-            PersonneClass pers3 = new PersonneClass("Grace 3");
-            PersonneClass pers4 = new PersonneClass("Grace 4");
-            PersonneClass pers5 = new PersonneClass("Grace 5");
 
             collectionPersonnes.Add(pers1);
             collectionPersonnes.Add(pers2);
-            collectionPersonnes.Add(pers3);
-            collectionPersonnes.Add(pers4);
-            collectionPersonnes.Add(pers5);
-            db.InsertAll(collectionPersonnes);
+
+            CollectionMsg.Add(new MessageClass("Coucou toi", p, pers2));
+            CollectionMsg.Add(new MessageClass("Coucou ca va?", pers2, p));
+
+            
+            try
+            {
+                db.InsertAll(collectionPersonnes);
+            }
+            catch (SQLite.SQLiteException e)
+            {
+                Console.WriteLine("[ERROR INSERT] {0}", e);
+            }
 
             /*foreach(var per in collectionPersonnes)
             {
@@ -153,13 +176,14 @@ namespace SecureChatApp.ViewModel
         {
             if (selectedPersonne != null)
             {
-                CollectionMsg.Add(new MessageClass(edtMsgText, new PersonneClass("Grace 1"), selectedPersonne));
+                CollectionMsg.Add(new MessageClass(edtMsgText, GRACE, selectedPersonne));
                 Console.WriteLine("[ADD MESSAGE] from: {0} to: {1} message: {2}", 1, SelectPersonne.Username, edtMsgText);
                 InputMsg = "";
                 this.NotifyPropertyChanged("CollectionMsgByPersonne");
             }
             else
             {
+                MessageBox.Show("Veillez selectionner une personne");
                 Console.WriteLine("[ERROR ADD MESSAGE] selectionner une personne");
             }
         }
