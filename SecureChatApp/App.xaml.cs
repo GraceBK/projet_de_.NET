@@ -19,7 +19,7 @@ namespace SecureChatApp
         {
             base.OnStartup(e);
             var app = new MainWindow();
-            ///var context = new MainViewModel();
+            //var context = new MainViewModel();
             //app.DataContext = context;
             app.Show();
         }
