@@ -11,14 +11,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SecureChatApp.ViewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         private string dbPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "database\\grace.db3");// "db/grace.db3";
         SQLiteConnection db;
+
+
+
+        private Page page;
 
         private static PersonneClass GRACE;
 
@@ -92,11 +97,28 @@ namespace SecureChatApp.ViewModel
                 return null;
             }
         }
+
+        public Page Page
+        {
+            get => page;
+            set
+            {
+                if (Equals(page, value))
+                {
+                    return;
+                }
+
+                this.page = value;
+                this.NotifyPropertyChanged("Page");
+            }
+        }
         #endregion
 
         #region Constructeur
-        public MainViewModel()
+        public MainViewModel(Frame frame)
         {
+            page = new PageHome(frame);
+            
             #region Instanciation_de_la_connexion
             Console.WriteLine(dbPath);
             db = new SQLiteConnection(dbPath);

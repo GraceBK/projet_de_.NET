@@ -1,7 +1,6 @@
-﻿using System;
+﻿using SecureChatApp.ViewModel;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using SecureChatApp.Model;
-using SecureChatApp.ViewModel;
-
 namespace SecureChatApp.View
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour PageHome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageHome : Page
     {
-        // Constructeur
-        public MainWindow()
+        public PageHome(Frame frame)
         {
             InitializeComponent();
-            DataContext = new MainViewModel(Home);
+            DataContext = new LoginViewModel(frame);
         }
     }
 }
