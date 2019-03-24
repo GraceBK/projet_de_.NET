@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace SecureChatApp.ViewModel
 
         private ObservableCollection<PersonneClass> collectionPersonnes;
         private PersonneClass selectedPersonne;
-        private String edtMsgText;
+        private string edtMsgText;
         
         #region Proprietes
         public PersonneClass SelectPersonne
@@ -54,7 +55,7 @@ namespace SecureChatApp.ViewModel
             }
         }
 
-        public String InputMsg
+        public string InputMsg
         {
             get => edtMsgText;
             set
@@ -86,7 +87,7 @@ namespace SecureChatApp.ViewModel
             {
                 if (selectedPersonne != null)
                 {
-                    return GRACE.MessagesByUser(selectedPersonne);
+                    return GRACE.MessagesByUser(selectedPersonne.ID);
                 }
                 return null;
             }
@@ -101,7 +102,7 @@ namespace SecureChatApp.ViewModel
             db = new SQLiteConnection(dbPath);
             #endregion
             db.CreateTable<PersonneClass>();
-            //db.CreateTable<MessageClass>();
+            db.CreateTable<MessageClass>();
 
 
 
@@ -113,7 +114,7 @@ namespace SecureChatApp.ViewModel
                 db.Insert(p);
             } catch (SQLite.SQLiteException e)
             {
-                Console.WriteLine("EXIT");
+                Console.WriteLine("[EXIT] {0}", e);
             }
             
             
@@ -126,9 +127,9 @@ namespace SecureChatApp.ViewModel
             collectionPersonnes.Add(pers1);
             collectionPersonnes.Add(pers2);
 
-            CollectionMsg.Add(new MessageClass("Coucou toi", p, pers2));
-            CollectionMsg.Add(new MessageClass("Coucou ca va?", pers2, p));
-
+            CollectionMsg.Add(new MessageClass("Coucou toi", p.ID, pers2.ID));
+            CollectionMsg.Add(new MessageClass("Coucou ca va?", pers2.ID, p.ID));
+            
             
             try
             {
@@ -139,10 +140,20 @@ namespace SecureChatApp.ViewModel
                 Console.WriteLine("[ERROR INSERT] {0}", e);
             }
 
+            try
+            {
+                db.InsertAll(CollectionMsg);
+            }
+            catch (SQLite.SQLiteException e)
+            {
+                Console.WriteLine("[ERROR INSERT] {0}", e);
+            }
+
             /*foreach(var per in collectionPersonnes)
             {
                 db.InsertAll()
             }*/
+            
 
             AddPersonneCommand = new RelayCommand(AddPersonne);
             RemovePersonneCommand = new RelayCommand(RemovePersonne);
@@ -176,7 +187,17 @@ namespace SecureChatApp.ViewModel
         {
             if (selectedPersonne != null)
             {
-                CollectionMsg.Add(new MessageClass(edtMsgText, GRACE, selectedPersonne));
+                MessageClass newMessage = new MessageClass(edtMsgText, GRACE.ID, selectedPersonne.ID);
+                CollectionMsg.Add(newMessage);
+                #region add message
+                //db.Insert
+                try
+                {
+                    db.Insert(newMessage);
+                }
+                catch
+                { }
+                #endregion
                 Console.WriteLine("[ADD MESSAGE] from: {0} to: {1} message: {2}", 1, SelectPersonne.Username, edtMsgText);
                 InputMsg = "";
                 this.NotifyPropertyChanged("CollectionMsgByPersonne");

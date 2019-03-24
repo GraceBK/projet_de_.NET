@@ -82,12 +82,22 @@
     <Compile Include="ViewModel\AddViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="View\AddPersonne.xaml.cs">
+      <DependentUpon>AddPersonne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PersonneControl.xaml.cs">
       <DependentUpon>PersonneControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowAddPersonne.xaml.cs">
       <DependentUpon>WindowAddPersonne.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddPersonne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PersonneControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

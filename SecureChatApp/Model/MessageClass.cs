@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace SecureChatApp.Model
 {
+    [Table("Message")]
     public class MessageClass
     {
         #region Constructeur
-        public MessageClass(String message, PersonneClass from, PersonneClass to)
+        public MessageClass(String message, string from, string to)
         {
             string id = Guid.NewGuid().ToString("D");
             ID = id;
@@ -21,14 +23,15 @@ namespace SecureChatApp.Model
         #endregion
 
         #region Proprietes
+        [PrimaryKey, Column("_id")]
         public string ID { get; set; }
-
+        [Column("Message")]
         public string Msg { get; set; }
-
-        public PersonneClass From { get; set; }
-
-        public PersonneClass To { get; set; }
-
+        [Column("From")]
+        public string From { get; set; }
+        [Column("To")]
+        public string To { get; set; }
+        [Column("CreateAt")]
         public DateTime CreateAt { get; set; }
         #endregion
 
@@ -36,7 +39,7 @@ namespace SecureChatApp.Model
         public override string ToString()
         {
             string res;
-            res = "Message: [{"+ Msg + "} | {" + From.Username + "} --> {" + To.Username + "} | {" + CreateAt + "}]";
+            res = "Message: [{"+ Msg + "} | {" + From + "} --> {" + To + "} | {" + CreateAt + "}]";
             return res;
         }
         #endregion

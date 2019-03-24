@@ -19,11 +19,11 @@ namespace SecureChatApp.Model
         public string Username { get; set; }
 
         // Proprietes messages by user
-        public ObservableCollection<MessageClass> MessagesByUser(PersonneClass personne)
+        public ObservableCollection<MessageClass> MessagesByUser(string personneId)
         {
             IEnumerable<MessageClass> query =
                 from msg in MessageSingleton.NewInstance.GetSetMessages
-                where msg.From == this && msg.To == personne || msg.To == this && msg.From == personne
+                where msg.From == this.ID && msg.To == personneId || msg.To == this.ID && msg.From == personneId
                 select msg;
             foreach (MessageClass m in query)
             {
@@ -37,7 +37,7 @@ namespace SecureChatApp.Model
 
 
         #region Constructeur
-        public PersonneClass(String username)
+        public PersonneClass(string username)
         {
             string id = Guid.NewGuid().ToString("D");
             ID = id;
