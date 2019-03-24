@@ -6,31 +6,6 @@
         xmlns:local="clr-namespace:SecureChatApp.View"
         mc:Ignorable="d"
         Title="MainWindow" WindowState="Normal">
-    <!--Window.Resources>
-        <Style TargetType="Button" x:Key="SendButton">
-            <Setter Property="Background" Value="#2C333B"/>
-            <Setter Property="Foreground" Value="#CCCCCC"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border
-                            CornerRadius="10"
-                            BorderBrush="#CCCCCC"
-                            BorderThickness="0.1"
-                            Background="#2C333B">
-                            <ContentPresenter 
-                                x:Name="contentPresenter"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources-->
     <Grid>
         <Frame
             Name="Home"

@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageChat">
 
-    <!--Window.Resources>
+    <Page.Resources>
         <Style TargetType="Button" x:Key="SendButton">
             <Setter Property="Background" Value="#2C333B"/>
             <Setter Property="Foreground" Value="#CCCCCC"/>
@@ -32,7 +32,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources-->
+    </Page.Resources>
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -80,7 +80,7 @@
             </Grid.ColumnDefinitions>
             <Button
                 Command="{Binding AddPersonneCommand}"
-   
+                Style="{StaticResource SendButton}"
                 FontSize="20"
                 FontWeight="UltraBold"
                 Grid.Column="0"
@@ -93,7 +93,7 @@
             </Button>
             <Button 
                 Command="{Binding RemovePersonneCommand}"
-              
+                Style="{StaticResource SendButton}"
                 FontSize="20"
                 FontWeight="UltraBold"
                 Grid.Column="2"
@@ -172,7 +172,7 @@
 
             <Button 
                 Command="{Binding SendMessageCommand}"
-                
+                Style="{StaticResource SendButton}"
                 Content="SEND"
                 FontSize="15"
                 FontWeight="UltraBold"

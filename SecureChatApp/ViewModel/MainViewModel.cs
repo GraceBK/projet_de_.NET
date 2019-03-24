@@ -18,20 +18,21 @@ namespace SecureChatApp.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private string dbPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "database\\grace.db3");// "db/grace.db3";
-        SQLiteConnection db;
+        //private string dbPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "database\\grace.db3");// "db/grace.db3";
+        //SQLiteConnection db;
 
 
 
         private Page page;
 
-        private static PersonneClass GRACE;
+        //private static PersonneClass GRACE;
 
-        private ObservableCollection<PersonneClass> collectionPersonnes;
-        private PersonneClass selectedPersonne;
-        private string edtMsgText;
+        //private ObservableCollection<PersonneClass> collectionPersonnes;
+        //private PersonneClass selectedPersonne;
+        //private string edtMsgText;
         
         #region Proprietes
+        /**
         public PersonneClass SelectPersonne
         {
             get => selectedPersonne;
@@ -97,7 +98,7 @@ namespace SecureChatApp.ViewModel
                 return null;
             }
         }
-
+        */
         public Page Page
         {
             get => page;
@@ -118,7 +119,7 @@ namespace SecureChatApp.ViewModel
         public MainViewModel(Frame frame)
         {
             page = new PageHome(frame);
-            
+            /**
             #region Instanciation_de_la_connexion
             Console.WriteLine(dbPath);
             db = new SQLiteConnection(dbPath);
@@ -171,20 +172,21 @@ namespace SecureChatApp.ViewModel
                 Console.WriteLine("[ERROR INSERT] {0}", e);
             }
 
-            /*foreach(var per in collectionPersonnes)
+            /foreach(var per in collectionPersonnes)
             {
                 db.InsertAll()
-            }*/
+            }/
             
 
             AddPersonneCommand = new RelayCommand(AddPersonne);
             RemovePersonneCommand = new RelayCommand(RemovePersonne);
             SendMessageCommand = new RelayCommand(SendMsg);
+            */
         }
         #endregion
 
         #region Mes_Commandes
-        public ICommand AddPersonneCommand { get; set; }
+        /*public ICommand AddPersonneCommand { get; set; }
 
         public void AddPersonne()
         {
@@ -230,7 +232,7 @@ namespace SecureChatApp.ViewModel
                 Console.WriteLine("[ERROR ADD MESSAGE] selectionner une personne");
             }
         }
-
+        */
         #endregion
 
 
@@ -250,7 +252,7 @@ namespace SecureChatApp.ViewModel
 
 
         #region Event_and_Notify
-        public event PropertyChangedEventHandler PropertyChanged;
+        /*public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string monPropriete)
         {
@@ -267,7 +269,7 @@ namespace SecureChatApp.ViewModel
             variable = valeur;
             NotifyPropertyChanged(monPropriete);
             return true;
-        }
+        }*/
         #endregion
     }
 }
