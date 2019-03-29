@@ -26,6 +26,8 @@ namespace SecureChatApp.ViewModel
 
         private Page page;
 
+        private Frame frame;
+
         private static PersonneClass GRACE;
 
         private ObservableCollection<PersonneClass> collectionPersonnes;
@@ -181,6 +183,8 @@ namespace SecureChatApp.ViewModel
             AddPersonneCommand = new RelayCommand(AddPersonne);
             RemovePersonneCommand = new RelayCommand(RemovePersonne);
             SendMessageCommand = new RelayCommand(SendMsg);
+
+            this.frame = frame;
         }
 
 
@@ -189,8 +193,12 @@ namespace SecureChatApp.ViewModel
 
         public void AddPersonne()
         {
-            WindowAddPersonne windowAdd = new WindowAddPersonne();
-            windowAdd.Show();
+            AddPersonne viewPageAdd = new AddPersonne(frame);
+            frame.Navigate(viewPageAdd);
+
+            this.NotifyPropertyChanged("AddContact");
+            /*WindowAddPersonne windowAdd = new WindowAddPersonne();
+            windowAdd.Show();*/
         }
 
         public ICommand RemovePersonneCommand { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecureChatApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace SecureChatApp.View
     /// </summary>
     public partial class AddPersonne : Page
     {
-        public AddPersonne()
+        public AddPersonne(Frame frame)
         {
             InitializeComponent();
+            DataContext = new AddViewModel(frame);
         }
     }
 }

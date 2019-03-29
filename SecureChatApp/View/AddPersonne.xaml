@@ -5,10 +5,174 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SecureChatApp.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="AddPersonne">
 
-    <Grid>
-        
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="BackButton">
+            <Setter Property="Background" Value="#2C333B"/>
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="50"
+                            BorderBrush="#CCCCCC"
+                            BorderThickness="0.1"
+                            Background="#2C333B">
+                            <ContentPresenter 
+                                x:Name="contentPresenter"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="SubmitButton">
+            <Setter Property="Background" Value="#2C333B"/>
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="10"
+                            BorderBrush="#CCCCCC"
+                            BorderThickness="0.1"
+                            Background="#2C333B">
+                            <ContentPresenter 
+                                x:Name="contentPresenter"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Foreground="White"
+            FontSize="30"
+            FontWeight="UltraBold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="1">Ajout d'une personne</TextBlock>
+
+        <Grid
+            Grid.Column="2"
+            Grid.Row="2"
+            HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid
+                Grid.Column="0"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Foreground="White"
+                    FontSize="30"
+                    FontWeight="UltraBold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Padding="5,12,10,15">Username</Label>
+                
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="0" Margin="0"
+              VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Border
+                    BorderBrush="White"
+                    BorderThickness="0.1"
+                    CornerRadius="10"
+                    Height="70"
+                    Background="#2B2C33">
+                    <TextBox
+                        Name="MyUsername"
+                        FontSize="30"
+                        AcceptsReturn="True"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        CaretBrush="White"
+                        Background="Transparent"
+                        Foreground="#D5D9DE"
+                        BorderThickness="0"
+                        VerticalAlignment="Center"
+                        Padding="5,12,5,12"
+                        TextWrapping="Wrap">
+                    </TextBox>
+                </Border>
+            </Grid>
+            
+        </Grid>
+        <!--Click="ButtonCreatePersonne_Click"-->
+
+        <Grid Grid.Column="2" Grid.Row="3" Margin="0"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Button
+                Style="{StaticResource SubmitButton}"
+                FontSize="30"
+                FontWeight="UltraBold"
+                Background="#424242"
+                Foreground="White"
+                Grid.Column="1"
+                Grid.Row="3">Ajout</Button>
+        </Grid>
+        <Button
+            Style="{StaticResource BackButton}"
+            FontSize="30"
+            FontWeight="UltraBold"
+            Background="#424242"
+            Foreground="White"
+            Grid.Column="1"
+            Grid.Row="1">Back</Button>
     </Grid>
 </Page>

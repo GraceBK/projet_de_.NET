@@ -26,5 +26,10 @@ namespace SecureChatApp.View
             InitializeComponent();
             DataContext = new LoginViewModel(frame);
         }
+
+        private void LoginPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

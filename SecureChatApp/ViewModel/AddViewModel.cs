@@ -5,17 +5,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SecureChatApp.ViewModel
 {
-    class AddViewModel
+    class AddViewModel: ViewModelBase
     {
         ObservableCollection<PersonneClass> myCollection;
 
-        public AddViewModel(ObservableCollection<PersonneClass> personnes)
+        public AddViewModel(Frame frame/*ObservableCollection<PersonneClass> personnes*/)
         {
-            myCollection = new ObservableCollection<PersonneClass>();
-            myCollection = personnes;
+            //myCollection = new ObservableCollection<PersonneClass>();
+            //myCollection = personnes;
             //DataContext = myCollection;
         }
     }
