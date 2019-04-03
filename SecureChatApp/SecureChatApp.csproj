@@ -94,9 +94,6 @@
     <Compile Include="View\PageHome.xaml.cs">
       <DependentUpon>PageHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PersonneControl.xaml.cs">
-      <DependentUpon>PersonneControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\WindowAddPersonne.xaml.cs">
       <DependentUpon>WindowAddPersonne.xaml</DependentUpon>
     </Compile>
@@ -121,10 +118,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PageHome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PersonneControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

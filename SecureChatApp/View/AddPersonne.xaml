@@ -128,6 +128,7 @@
                     Height="70"
                     Background="#2B2C33">
                     <TextBox
+                        Text="{Binding InputNameContact}"
                         Name="MyUsername"
                         FontSize="30"
                         AcceptsReturn="True"
@@ -158,6 +159,7 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Button
+                Command="{Binding AddCommand}"
                 Style="{StaticResource SubmitButton}"
                 FontSize="30"
                 FontWeight="UltraBold"
@@ -167,6 +169,7 @@
                 Grid.Row="3">Ajout</Button>
         </Grid>
         <Button
+            Command="{Binding BackCommand}"
             Style="{StaticResource BackButton}"
             FontSize="30"
             FontWeight="UltraBold"

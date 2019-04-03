@@ -130,7 +130,7 @@ namespace SecureChatApp.ViewModel
 
 
 
-            PersonneClass p = new PersonneClass("Test moi");
+            /*PersonneClass p = new PersonneClass("Test moi");
             GRACE = p;
 
             try
@@ -140,11 +140,26 @@ namespace SecureChatApp.ViewModel
             catch (SQLite.SQLiteException e)
             {
                 Console.WriteLine("[EXIT] {0}", e);
+            }*/
+
+            var table = (from i in db.Table<PersonneClass>() select i);
+            var tableMsg = (from i in db.Table<MessageClass>() select i);
+
+            collectionPersonnes = new ObservableCollection<PersonneClass>();
+
+            foreach (var pers in table) {
+                Console.WriteLine("[GGGGGGGGGGGGGGGG] {0}", pers.Username);
+                collectionPersonnes.Add(new PersonneClass(pers.Username));
+            }
+
+            foreach (var msg in tableMsg)
+            {
+                CollectionMsg.Add(new MessageClass("Coucou toi", "", ""));
             }
 
 
 
-            collectionPersonnes = new ObservableCollection<PersonneClass>();
+            /*collectionPersonnes = new ObservableCollection<PersonneClass>();
 
             PersonneClass pers1 = new PersonneClass("Grace 1");
             PersonneClass pers2 = new PersonneClass("Grace 2");
@@ -152,8 +167,8 @@ namespace SecureChatApp.ViewModel
             collectionPersonnes.Add(pers1);
             collectionPersonnes.Add(pers2);
 
-            CollectionMsg.Add(new MessageClass("Coucou toi", p.ID, pers2.ID));
-            CollectionMsg.Add(new MessageClass("Coucou ca va?", pers2.ID, p.ID));
+            //CollectionMsg.Add(new MessageClass("Coucou toi", p.ID, pers2.ID));
+            //CollectionMsg.Add(new MessageClass("Coucou ca va?", pers2.ID, p.ID));
 
 
             try
@@ -172,7 +187,7 @@ namespace SecureChatApp.ViewModel
             catch (SQLite.SQLiteException e)
             {
                 Console.WriteLine("[ERROR INSERT] {0}", e);
-            }
+            }*/
 
             /*foreach(var per in collectionPersonnes)
             {

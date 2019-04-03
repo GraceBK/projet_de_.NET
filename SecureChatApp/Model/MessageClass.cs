@@ -11,6 +11,7 @@ namespace SecureChatApp.Model
     public class MessageClass
     {
         #region Constructeur
+        public MessageClass() { }
         public MessageClass(String message, string from, string to)
         {
             string id = Guid.NewGuid().ToString("D");

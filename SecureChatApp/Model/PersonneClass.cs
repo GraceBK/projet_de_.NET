@@ -17,6 +17,8 @@ namespace SecureChatApp.Model
         public string ID { get; set; }
         [Column("Name"), Unique]
         public string Username { get; set; }
+        [Column("Admin")]
+        public string Root { get; set; }
 
         // Proprietes messages by user
         public ObservableCollection<MessageClass> MessagesByUser(string personneId)
@@ -37,11 +39,23 @@ namespace SecureChatApp.Model
 
 
         #region Constructeur
+        public PersonneClass() { }
+
         public PersonneClass(string username)
+        {
+            string id = Guid.NewGuid().ToString("D");
+            string root = "nope";
+            ID = id;
+            Username = username;
+            Root = root;
+        }
+
+        public PersonneClass(string username, string root)
         {
             string id = Guid.NewGuid().ToString("D");
             ID = id;
             Username = username;
+            Root = root;
         }
         #endregion
 
