@@ -28,7 +28,7 @@ namespace SecureChatApp.ViewModel
 
         private Frame frame;
 
-        private static PersonneClass GRACE;
+        private static PersonneClass ROOT;
 
         private ObservableCollection<PersonneClass> collectionPersonnes;
         private PersonneClass selectedPersonne;
@@ -96,7 +96,7 @@ namespace SecureChatApp.ViewModel
             {
                 if (selectedPersonne != null)
                 {
-                    return GRACE.MessagesByUser(selectedPersonne.ID);
+                    return ROOT.MessagesByUser(selectedPersonne.ID);
                 }
                 return null;
             }
@@ -128,21 +128,17 @@ namespace SecureChatApp.ViewModel
             db.CreateTable<PersonneClass>();
             db.CreateTable<MessageClass>();
 
+            var rootQuery = (from i in db.Table<PersonneClass>() where i.Root != "nope" select i);
 
-
-            /*PersonneClass p = new PersonneClass("Test moi");
-            GRACE = p;
-
-            try
+            foreach (var pers in rootQuery)
             {
-                db.Insert(p);
+                if (pers.Root != "nope")
+                {
+                    ROOT = new PersonneClass(pers.Username);
+                }
             }
-            catch (SQLite.SQLiteException e)
-            {
-                Console.WriteLine("[EXIT] {0}", e);
-            }*/
-
-            var table = (from i in db.Table<PersonneClass>() select i);
+            
+            var table = (from i in db.Table<PersonneClass>() where i.Root == "nope" select i);
             var tableMsg = (from i in db.Table<MessageClass>() select i);
 
             collectionPersonnes = new ObservableCollection<PersonneClass>();
@@ -233,7 +229,7 @@ namespace SecureChatApp.ViewModel
         {
             if (selectedPersonne != null)
             {
-                MessageClass newMessage = new MessageClass(edtMsgText, GRACE.ID, selectedPersonne.ID);
+                MessageClass newMessage = new MessageClass(edtMsgText, ROOT.ID, selectedPersonne.ID);
                 CollectionMsg.Add(newMessage);
                 #region add message
                 //db.Insert
