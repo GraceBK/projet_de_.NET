@@ -21,15 +21,16 @@ namespace SecureChatApp.Model
         public string Root { get; set; }
 
         // Proprietes messages by user
-        public ObservableCollection<MessageClass> MessagesByUser(string personneId)
+        public ObservableCollection<MessageClass> MessagesByUser(string personneUsername)
         {
             IEnumerable<MessageClass> query =
                 from msg in MessageSingleton.NewInstance.GetSetMessages
-                where msg.From == this.ID && msg.To == personneId || msg.To == this.ID && msg.From == personneId
+                where msg.From == this.Username && msg.To == personneUsername || msg.To == this.Username && msg.From == personneUsername
                 select msg;
+            
             foreach (MessageClass m in query)
             {
-                Console.WriteLine("{0} ------- ", m);
+                Console.WriteLine("////////{0} ------- ", m);
             }
             return new ObservableCollection<MessageClass>(query.ToList());
         }

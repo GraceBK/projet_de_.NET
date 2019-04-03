@@ -44,6 +44,7 @@ namespace SecureChatApp.ViewModel
                 if (selectedPersonne != value)
                 {
                     selectedPersonne = value;
+                    Console.WriteLine("==========> {0}", selectedPersonne.Username);
                     this.NotifyPropertyChanged("SelectPersonne");
                     this.NotifyPropertyChanged("CollectionMsgByPersonne");
                 }
@@ -96,7 +97,8 @@ namespace SecureChatApp.ViewModel
             {
                 if (selectedPersonne != null)
                 {
-                    return ROOT.MessagesByUser(selectedPersonne.ID);
+                    
+                    return ROOT.MessagesByUser(selectedPersonne.Username);
                 }
                 return null;
             }
@@ -144,14 +146,26 @@ namespace SecureChatApp.ViewModel
             collectionPersonnes = new ObservableCollection<PersonneClass>();
 
             foreach (var pers in table) {
-                Console.WriteLine("[GGGGGGGGGGGGGGGG] {0}", pers.Username);
                 collectionPersonnes.Add(new PersonneClass(pers.Username));
+
+                foreach (var msg in tableMsg)
+                {
+                    CollectionMsg.Add(new MessageClass(msg.Msg, ROOT.ID, pers.ID));
+                }
             }
 
-            foreach (var msg in tableMsg)
+            var innerJoinQuery =
+                from sms in db.Table<MessageClass>()
+                join per in db.Table<PersonneClass>() on sms.To equals per.ID
+                select new { PersonneClass = per.ID, MessageClass = sms.To };
+
+            foreach (var _it in innerJoinQuery)
             {
-                CollectionMsg.Add(new MessageClass("Coucou toi", "", ""));
+                Console.WriteLine("==========> {0}", _it.PersonneClass);
             }
+
+            Console.WriteLine("====§§§§=> {0}", innerJoinQuery);
+
 
 
 
@@ -229,17 +243,33 @@ namespace SecureChatApp.ViewModel
         {
             if (selectedPersonne != null)
             {
-                MessageClass newMessage = new MessageClass(edtMsgText, ROOT.ID, selectedPersonne.ID);
-                CollectionMsg.Add(newMessage);
-                #region add message
-                //db.Insert
-                try
+                MessageClass newMessage;
+
+                var rootQuery = (from i in db.Table<PersonneClass>() where i.Root != "nope" select i);
+
+                foreach (var pers in rootQuery)
                 {
-                    db.Insert(newMessage);
+                    if (pers.Root != "nope")
+                    {
+                        newMessage = new MessageClass(edtMsgText, pers.Username, selectedPersonne.Username);
+                        //ROOT = new PersonneClass(pers.Username);
+                        CollectionMsg.Add(newMessage);
+
+
+                        #region add message
+                        //db.Insert
+                        try
+                        {
+                            db.Insert(newMessage);
+                        }
+                        catch
+                        { }
+                        #endregion
+                    }
                 }
-                catch
-                { }
-                #endregion
+
+                
+                
                 Console.WriteLine("[ADD MESSAGE] from: {0} to: {1} message: {2}", 1, SelectPersonne.Username, edtMsgText);
                 InputMsg = "";
                 this.NotifyPropertyChanged("CollectionMsgByPersonne");
