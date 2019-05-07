@@ -20,15 +20,23 @@ By **Grace BOUKOU**
 ### Un écran en deux parties ===> (74%)
 
 - Une liste des conversations ===> (100%)
+
 La liste de conversation est fonctionnelle 
 
 - Bouton (+) pour ajouter une conversation ===> (60%)
+
 Manque plus que la Generation de la cle de chiffrement
+
 - Bouton (-) pour retirer une conversation ===> (60%)
+
 Manque plus que la Generation de la cle de chiffrement
+
 - Une conversation affichée à droite avec les messages ===> (100%)
+
 Les messages (par utilisateur) sont affichés 
+
 - Une boite de texte avec le bouton Send ===> (50%)
+
 Manque que l'envoi sur le serveur (/!\ d'abord ressoudre le probleme avec l'erreur 400 sur la page 
 de connexion)
 
